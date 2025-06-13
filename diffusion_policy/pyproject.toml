@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "diffusion_policy"
+version = "0.1.0"
+description = "A utility package for your project"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+
+repository = "https://github.com/your-repo/myrobot"
+# Optional: If you have a README file
+readme = "README.md"
+classifiers=[
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3.10",
+]
+packages = [{include = "diffusion_policy"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+numpy = "1.23.3"
+
+
+[tool.poetry.dev-dependencies]
+# 可选开发依赖，例如:
+# pytest = "^7.0.0"
+
+[tool.poetry.scripts]
+# 可选，如果你有命令行脚本
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 
+
+

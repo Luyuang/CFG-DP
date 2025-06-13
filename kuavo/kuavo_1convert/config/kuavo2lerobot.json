@@ -1,0 +1,70 @@
+{   
+    "features_remark": "if you want to add new features, you need to add them here.",
+    "features": [
+        "observation.state",
+        "action",
+        "observation.imu"
+    ],
+    
+    "video_features_remark": "if you want add new video features, you need to add them here.",
+    "video_features": [
+        "observation.images.camera",
+        "observation.images.cam_high"
+    ],
+
+    "feature_processors_remark": "`feature_processors` define the feature raw_data from topic, and msg process function at kuavo_rosbag/msg_process.py.",
+    "feature_processors": {
+        "observation.state":{
+            "topic": "/sensors_data_raw",
+            "msg_process_fn": "process_joint_state"
+        },
+        "action": {
+            "topic": "/joint_cmd",
+            "msg_process_fn": "process_joint_cmd"
+        },
+        "observation.imu": {
+            "topic": "/sensors_data_raw",
+            "msg_process_fn": "process_sensors_data_raw_extract_imu"
+        },
+        "observation.images.camera": {
+            "topic": "/camera/color/image_raw",
+            "msg_process_fn": "process_color_image"
+        },
+        "observation.images.cam_high": {
+            "topic": "/cam_high/color/image_raw",
+            "msg_process_fn": "process_color_image"
+        },
+        "observation.images.cam_low": {
+            "topic": "/cam_low/color/image_raw",
+            "msg_process_fn": "process_color_image"
+        },
+        "observation.images.cam_right_wrist": {
+            "topic": "/cam_right_wrist/color/image_raw",
+            "msg_process_fn": "process_color_image"
+        },
+        "observation.images.cam_left_wrist": {
+            "topic": "/cam_left_wrist/color/image_raw",
+            "msg_process_fn": "process_color_image"
+        },
+        "observation.images.camera.depth": {
+            "topic": "/camera/depth/image_rect_raw",
+            "msg_process_fn": "process_depth_image"
+        },
+        "observation.images.cam_high.depth": {
+            "topic": "/cam_high/depth/image_rect_raw",
+            "msg_process_fn": "process_depth_image"
+        },
+        "observation.images.cam_low.depth": {
+            "topic": "/cam_low/depth/image_rect_raw",
+            "msg_process_fn": "process_depth_image"
+        },
+        "observation.images.cam_right_wrist.depth": {
+            "topic": "/cam_right_wrist/depth/image_rect_raw",
+            "msg_process_fn": "process_depth_image"
+        },
+        "observation.images.cam_left_wrist.depth": {
+            "topic": "/cam_left_wrist/depth/image_rect_raw",
+            "msg_process_fn": "process_depth_image"
+        }
+    }
+}

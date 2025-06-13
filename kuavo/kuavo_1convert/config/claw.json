@@ -1,0 +1,25 @@
+{
+    "rosbag_save_dir": "~/main/rosbag_out",
+    "rosbag_temp_dir": "~/main/rosbag_temp",
+    "use_lejuclaw": false,
+    "use_qiangnao": true,
+    "only_half_up_body": true,
+    "record_topics_lejuclaw": [
+        "/cam_h/color/compressed",
+        "/cam_l/color/compressed",
+        "/cam_r/color/compressed",
+        "/joint_cmd",
+        "/sensors_data_raw",
+        "/leju_claw_state",
+        "/leju_claw_command"
+    ],
+    "record_topics_qiangnao": [
+        "/cam_h/color/compressed",
+        "/cam_l/color/compressed",
+        "/cam_r/color/compressed",
+        "/joint_cmd",
+        "/sensors_data_raw",
+        "/control_robot_hand_position",
+        "/control_robot_hand_position_state"
+    ]
+}

@@ -1,0 +1,62 @@
+name: umi
+
+camera_obs_latency: 0.125
+robot_obs_latency: 0.0001
+gripper_obs_latency: 0.02
+dataset_frequeny: 0 #59.94
+obs_down_sample_steps: 3 # 3, 1
+
+low_dim_obs_horizon: 2
+img_obs_horizon: 2
+action_horizon: 16
+ignore_proprioception: False
+
+dataset_path: &dataset_path /home/lejurobot/hx/kuavo/Task12_zed_dualArm/kuavo-zarr/Task12_zed_dualArm.zarr.zip
+image_shape: [3, 384, 512]
+shape_meta: &shape_meta
+  # acceptable types: rgb, low_dim
+  obs:
+    img01:
+      shape: ${task.image_shape}
+      horizon: ${task.img_obs_horizon} # int
+      type: rgb
+    img02:
+      shape: ${task.image_shape}
+      horizon: ${task.img_obs_horizon} # int
+      type: rgb
+    img03:
+      shape: ${task.image_shape}
+      horizon: ${task.img_obs_horizon} # int
+      type: rgb
+    # img04:
+    #   shape: ${task.image_shape}
+    #   type: rgb
+    agent_pos:
+      shape: [16]
+      horizon: ${task.img_obs_horizon} # int
+      type: low_dim
+  action: 
+    shape: [16]
+    horizon: ${task.action_horizon}
+
+
+# task_name: &task_name umi
+# dataset_path: &dataset_path data_workspace/fold_cloth/20231226_mirror_swap.zarr.zip
+# pose_repr: &pose_repr
+#   obs_pose_repr: relative # abs or rel
+#   action_pose_repr: relative # abs or rel or delta
+
+env_runner:
+  _target_: diffusion_policy.env_runner.real_pusht_image_runner.RealPushTImageRunner
+
+dataset:
+  _target_: diffusion_policy.dataset.umi_dataset.UmiDataset
+  shape_meta: *shape_meta
+  dataset_path: *dataset_path
+  cache_dir: null
+  # pose_repr: *pose_repr
+  action_padding: False
+  temporally_independent_normalization: False
+  repeat_frame_prob: 0.0
+  seed: 42
+  val_ratio: 0.05

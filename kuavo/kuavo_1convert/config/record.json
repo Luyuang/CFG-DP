@@ -1,0 +1,9 @@
+{ 
+  "record_topics_remark": "if you want to record new topics, you need to add them here.",
+  "record_topics": [
+    "/sensors_data_raw",
+    "/joint_cmd",
+    "/camera/depth/image_rect_raw",
+    "/camera/color/image_raw"
+  ]
+}

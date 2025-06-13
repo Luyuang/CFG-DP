@@ -1,0 +1,32 @@
+use_leju_claw: false
+use_qiangnao: true
+only_half_up_body: true
+
+default_camera_names:
+  # - head_cam_l
+  - head_cam_r
+  # - wrist_cam_l
+  - wrist_cam_r
+
+train_hz: 10  # 训练采样频率
+main_timeline: wrist_cam_r
+main_timeline_fps: 30 # 主相机的帧率
+sample_drop: 10 # 丢弃回合前后的10帧
+
+control_hand_side: right  # 可选：left, right, both
+
+dex_slice:    # 0-6: 左手关节 6-12: 右手关节, 只取左右手第一个关节作为开合的依据
+  - [0, 0]    # 如果只使用右半部分身体，左手关节可以不使用，设置为[0, 0]
+  - [6, 7]    # 如果只使用左半部分身体，右手关节可以不使用，设置为[6, 6]
+
+claw_slice:   # 0-2: 左手夹爪 2-4: 右手夹爪
+  - [0, 0]    # 如果只使用右半部分身体，左手夹爪可以不使用，设置为[0, 0]
+  - [1, 2]    # 如果只使用左半部分身体，右手夹爪可以不使用，设置为[1, 1]
+
+is_binary: false
+delta_action: false
+relative_start: false
+
+resize:
+  width: 640
+  height: 480

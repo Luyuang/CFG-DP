@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "utils"
+version = "0.1.0"
+description = "A utility package for your project"
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+
+repository = "https://github.com/your-repo/myrobot"
+# Optional: If you have a README file
+readme = "README.md"
+classifiers=[
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+    "Programming Language :: Python :: 3.10",
+]
+packages = [{include = "kuavo_utils"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+numpy = "^1.23.4"
+bagpy = "*"  # 如果没有特定版本要求，可以指定一个合适的版本
+matplotlib = "*"  # 选择合适的版本
+scipy = "*"  # 选择合适的版本
+# open3d = "*"  # 选择合适的版本
+
+
+[tool.poetry.dev-dependencies]
+# 可选开发依赖，例如:
+pytest = "^7.0.0"
+
+[tool.poetry.scripts]
+# 可选，如果你有命令行脚本
+# utils-cli = "utils.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api" 
+
+

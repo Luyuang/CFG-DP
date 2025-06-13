@@ -1,0 +1,75 @@
+TASK_TIME: 10.0   #任务持续时间
+CAM_HZ: 30        #相机采集频率
+TRAIN_HZ: 10      #训练频率
+SAMPLE_DROP: 2    #丢弃bag包里的前{SAMPLE_DROP}帧和后{SAMPLE_DROP}帧
+HAND_OPEN_STATE: [0, 0, 0, 0, 0, 0]
+HAND_CLOSE_STATE: &close_state [100, 100, 100, 100, 100, 100]
+
+JOINT_DIM_LABELS: ["zarm_l1_link", "zarm_l2_link", "zarm_l3_link", "zarm_l4_link", "zarm_l5_link", "zarm_l6_link", "zarm_l7_link", 
+                  "dex_hand_l1_link", "dex_hand_l2_link", "dex_hand_l3_link", "dex_hand_l4_link", "dex_hand_l5_link", "dex_hand_l6_link", 
+                  "zarm_r1_link", "zarm_r2_link", "zarm_r3_link", "zarm_r4_link", "zarm_r5_link", "zarm_r6_link", "zarm_r7_link", 
+                  "dex_hand_r1_link", "dex_hand_r2_link", "dex_hand_r3_link", "dex_hand_r4_link", "dex_hand_r5_link", "dex_hand_r6_link", 
+                  ]
+ACTION_DIM_LABELS: ["zarm_l_x", "zarm_l_y", "zarm_l_z", "zarm_l_rx", "zarm_l_ry", "zarm_l_rz", 
+                    "dex_hand_l1_link", "dex_hand_l2_link", "dex_hand_l3_link", "dex_hand_l4_link", "dex_hand_l5_link", "dex_hand_l6_link",
+                    "zarm_r_x", "zarm_r_y", "zarm_r_z", "zarm_r_rx", "zarm_r_ry", "zarm_r_rz", 
+                    "dex_hand_r1_link", "dex_hand_r2_link", "dex_hand_r3_link", "dex_hand_r4_link", "dex_hand_r5_link", "dex_hand_r6_link"
+                  ]
+DEFAULT_OBS_KEY_MAP:
+  img:
+    img01:
+      topic: "/cam_h/color/compressed"
+      msg_type: "CompressedImage"
+      handle:
+        processor: "kuavo_utils.rosmsg_processor.ProcessUtil.process_compressed_image" 
+        params:
+          resize: [384, 384]  # [width, height]
+    img02:
+      topic: "/cam_l/color/compressed"
+      msg_type: "CompressedImage"
+      handle:
+        processor: "kuavo_utils.rosmsg_processor.ProcessUtil.process_compressed_image"
+        params:
+          resize: [384, 384]  # [width, height]
+    # img03:
+    #   topic: "/cam_l/color/compressed"
+    #   msg_type: "CompressedImage"
+    #   handle:
+    #     processor: "kuavo_utils.rosmsg_processor.ProcessUtil.process_compressed_image"
+    #     params:
+    #       resize: [384, 384]
+    
+  low_dim:
+    cmd_joint:
+      topic: "/joint_cmd"
+      msg_type: "jointCmd"  #读bag包，msg_type暂时用不上
+      handle:
+        processor: "kuavo_utils.rosmsg_processor.ProcessUtil.process_jointCmd"
+
+    state_joint:
+      topic: "/sensors_data_raw"
+      msg_type: "sensorsData"
+      handle:
+        processor: "kuavo_utils.rosmsg_processor.ProcessUtil.process_sensorsData"
+
+    cmd_hand:
+      topic: "/control_robot_hand_position"
+      msg_type: "handcontrollerdemorosnode/robotHandPosition"
+      handle:
+        processor: "kuavo_utils.rosmsg_processor.ProcessUtil.process_hand_data"
+        params:
+          is_cmd: true
+          is_binary: false
+          eef_type: "dex"
+          
+    state_hand:
+      topic: "/control_robot_hand_position_state"
+      msg_type: "handcontrollerdemorosnode/robotHandPosition" 
+      handle:
+        processor: "kuavo_utils.rosmsg_processor.ProcessUtil.process_hand_data"
+        params:
+          is_cmd: false
+          is_binary: false
+          eef_type: "dex"
+
+
